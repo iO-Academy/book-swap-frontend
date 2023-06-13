@@ -4,7 +4,7 @@ const ClaimForm = ({id, apiBaseUrl, setClaimedBy}) => {
     const [name, setName] = useState(null)
     const [email, setEmail] = useState(null)
 
-    const onSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         const requestBody = {
             name: name,
@@ -29,10 +29,11 @@ const ClaimForm = ({id, apiBaseUrl, setClaimedBy}) => {
     }
 
     return (
-        <form className="">
+        <form className="" onSubmit={handleSubmit}>
             <p>Want to claim this book?</p>
             <input type="text" name="name" value={name} onChange={ (event) => setName(event.target.value) }/>
             <input type="email" name="email" value={email} onChange={ (event) => setEmail(event.target.value) } />
+            <input type="submit" value="Claim"/>
         </form>
     )
 }
