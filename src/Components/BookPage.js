@@ -1,3 +1,5 @@
+import BookItem from "./BookItem"
+
 const BookPage = () => {
 
 }

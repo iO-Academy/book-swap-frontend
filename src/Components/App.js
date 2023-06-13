@@ -4,7 +4,7 @@ import Homepage from "./Homepage";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App bg-amber-100">
       <BrowserRouter>
         <Navbar />
         <Routes>
