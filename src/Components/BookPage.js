@@ -14,13 +14,7 @@ const BookPage = ({apiBaseUrl}) => {
     const {id} = useParams()
 
     useEffect(() => {
-        fetch(apiBaseUrl + '/books' + id, {
-            mode: 'cors',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        })
+        fetch(apiBaseUrl + '/books/' + id)
         .then(response => response.json())
         .then(responseBody => {
             const book = responseBody.data
@@ -37,8 +31,15 @@ const BookPage = ({apiBaseUrl}) => {
     }, [])
     
     return (
-        <div>
-
+        <div className="flex flex-row flex-wrap justify-center w-full p-7 gap-7">
+            <img className="max-w-md w-full" src={image} alt={'Book cover of ' + title + ' by ' + author} />
+            <div className="max-w-lg flex flex-col gap-2">
+                <h2 className="text-3xl font-semibold">{title}</h2>
+                <p>{author}</p>
+                <p>{pageCount} pages</p>
+                <p>{genre}</p>
+                <p className="italic">{blurb}</p>
+            </div>
         </div>
     )
 }
