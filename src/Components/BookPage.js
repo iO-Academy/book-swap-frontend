@@ -1,25 +1,3 @@
-/*
-"id": 1,
-        "title": "Test",
-        "author": "Test person",
-        "blurb": "blurb",
-        "claimed_by_name": "Ash",
-        "image": "https://example.com/image.jpg",
-        "page_count": 1000,
-        "genre": {
-            "id": 1,
-            "name": "Action"
-        },
-        "review": [
-            {
-                "id": 3,
-                "name": "Ash",
-                "rating": 1,
-                "review": "bad"
-            }
-        ]
-*/
-
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 
@@ -46,6 +24,7 @@ const BookPage = ({apiBaseUrl}) => {
         .then(response => response.json())
         .then(responseBody => {
             const book = responseBody.data
+            console.log(book)
             setTitle(book.title)
             setAuthor(book.author)
             setBlurb(book.blurb)
@@ -53,7 +32,7 @@ const BookPage = ({apiBaseUrl}) => {
             setImage(book.image)
             setPageCount(book.page_count)
             setGenre(book.genre.name)
-            setReviews(book.review) // might get changed to reviews down the line
+            setReviews(book.reviews)
         })
     }, [])
     

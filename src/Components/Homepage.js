@@ -4,13 +4,7 @@ const Homepage = ({apiBaseUrl}) => {
     const [books, setBooks] = useState([])
 
     useEffect(() => {
-        fetch(apiBaseUrl + '/books', {
-            mode: 'cors',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        }).then(response => response.json())
+        fetch(apiBaseUrl + '/books').then(response => response.json())
             .then(responseBody => {
                 console.log(responseBody.data)
                 setBooks(responseBody.data)
@@ -25,10 +19,9 @@ const Homepage = ({apiBaseUrl}) => {
                     title={book.title} 
                     author={book.author}
                     genre={book.genre.name} 
-                    imgSrc={book.imgSrc} />
+                    image={book.image} />
                 ) : 'Loading...'
             }
-            <BookItem id="1" title="Banana" author="Mr Snuggles" genre="Horror" imgSrc="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657781256i/61439040.jpg" />
         </div>
     )
 }
