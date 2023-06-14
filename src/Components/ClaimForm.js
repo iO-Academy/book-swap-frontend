@@ -10,7 +10,7 @@ const ClaimForm = ({id, apiBaseUrl, setClaimedBy}) => {
             name: name,
             email: email
         }
-        fetch(apiBaseUrl + '/books/' + id, {
+        fetch(apiBaseUrl + '/books/claim/' + id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,13 +29,14 @@ const ClaimForm = ({id, apiBaseUrl, setClaimedBy}) => {
     }
 
     return (
-        <form className="" onSubmit={handleSubmit}>
+        <form className="flex flex-col max-w-xs gap-3 p-3 bg-green-300" onSubmit={handleSubmit}>
             <p>Want to claim this book?</p>
-            <input type="text" name="name" value={name} onChange={ (event) => setName(event.target.value) }/>
-            <input type="email" name="email" value={email} onChange={ (event) => setEmail(event.target.value) } />
-            <input type="submit" value="Claim"/>
+            <input className="p-1" type="text" name="name" placeholder="Name" value={name} onChange={ (event) => setName(event.target.value) }/>
+            <input className="p-1" type="email" name="email" placeholder="Email" value={email} onChange={ (event) => setEmail(event.target.value) } />
+            <input className="bg-green-500 p-1" type="submit" value="Claim"/>
         </form>
     )
 }
 
 export default ClaimForm
+
