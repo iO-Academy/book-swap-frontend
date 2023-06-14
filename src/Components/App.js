@@ -7,7 +7,7 @@ const App = () => {
   const apiBaseUrl = 'https://book-swap-api.dev.io-academy.uk/api'
 
   return (
-    <div className="App bg-amber-100 h-screen">
+    <div className="App bg-amber-100">
       <BrowserRouter>
         <Navbar />
         <Routes>
