@@ -11,9 +11,11 @@ const ClaimForm = ({id, apiBaseUrl, setClaimedBy}) => {
             email: email
         }
         fetch(apiBaseUrl + '/books/claim/' + id, {
+            mode: 'cors',
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(requestBody)
         }).then(response => {
@@ -21,7 +23,11 @@ const ClaimForm = ({id, apiBaseUrl, setClaimedBy}) => {
                 setClaimedBy(name)
             } else {
                 response.json().then(responseBody => {
-                    alert('Claiming the book failed: ' + responseBody.message)
+                    const nameErrorsString = responseBody.errors.name?.join("\n") ?? ''
+                    const emailErrorsString = responseBody.errors.email?.join("\n") ?? ''
+                    alert("Claiming the book failed: \n" 
+                    + nameErrorsString + "\n"
+                    + emailErrorsString)
                 })
             }
         })
