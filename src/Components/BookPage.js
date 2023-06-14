@@ -32,7 +32,7 @@ const BookPage = ({apiBaseUrl}) => {
     
     return (
         <div className="flex flex-row flex-wrap justify-center w-full p-7 gap-7">
-            <img className="max-w-md w-full" src={image} alt={'Book cover of ' + title + ' by ' + author} />
+            <img className="max-w-sm w-full" src={image} alt={'Book cover of ' + title + ' by ' + author} />
             <div className="max-w-lg flex flex-col gap-2">
                 <h2 className="text-3xl font-semibold">{title}</h2>
                 <p>{author}</p>
