@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import ClaimForm from "./ClaimForm"
 import ReturnForm from "./ReturnForm"
+import Review from "./Review"
 
 const BookPage = ({apiBaseUrl}) => {
     const [title, setTitle] = useState(null)
@@ -32,20 +33,32 @@ const BookPage = ({apiBaseUrl}) => {
     }, [])
     
     return (
-        !title ? <p className="text-center">Loading...</p> : 
-        <div className="flex flex-row flex-wrap justify-center w-full p-7 gap-7">
-            <img className="max-w-sm w-full" src={image} alt={'Book cover of ' + title + ' by ' + author} />
-            <div className="max-w-lg flex flex-col gap-2">
-                <h2 className="text-3xl font-semibold">{title}</h2>
-                <p>{author}</p>
-                <p>{pageCount} pages</p>
-                <p>{genre}</p>
-                { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
-                { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
-                
-                <p className="italic">{blurb}</p>
-            </div>
-        </div>
+        <>
+            {!title ? <p className="text-center">Loading...</p> : 
+                <div className="flex flex-row flex-wrap justify-center w-full p-7 gap-7 items-start">
+                    <img className="max-w-sm w-full" src={image} alt={'Book cover of ' + title + ' by ' + author} />
+                    <div className="max-w-lg flex flex-col gap-2">
+                        <h2 className="text-3xl font-semibold">{title}</h2>
+                        <p>{author}</p>
+                        <p>{pageCount} pages</p>
+                        <p>{genre}</p>
+                        { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
+                        { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
+                        
+                        <p className="italic">{blurb}</p>
+
+                        {reviews && 
+                            <div className="max-w-xl mx-auto flex flex-col gap-3">
+                                <h3 className="text-2xl font-semibold">Reviews</h3>
+                                {reviews.map((review, index) => 
+                                <Review author={review.name} score={review.rating} reviewText={review.review} key={review.name + index} />)}
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            
+        </>
     )
 }
 
