@@ -37,7 +37,7 @@ const ReviewForm = ({id, apiBaseUrl, setReviews}) => {
     }
 
     return (
-        <form className="flex flex-col max-w-xs gap-3 p-3 bg-green-300" onSubmit={handleSubmit}>
+        <form className="flex flex-col w-full sm:max-w-xs gap-3 p-3 bg-green-300" onSubmit={handleSubmit}>
             <p>Want to review this book?</p>
             <input className="p-1" type="text" name="name" placeholder="Name" value={name} onChange={ (event) => setName(event.target.value) }/>
             <div className="flex gap-3">
