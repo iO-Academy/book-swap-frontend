@@ -41,9 +41,9 @@ const BookPage = ({apiBaseUrl}) => {
     return (
         <>
             {!title ? <p className="text-center">Loading...</p> : 
-                <div className="flex flex-row flex-wrap justify-center w-full p-7 gap-7 items-start">
-                    <img className="max-w-sm w-full" src={image} alt={'Book cover of ' + title + ' by ' + author} />
-                    <div className="max-w-lg flex flex-col gap-2">
+                <div className="flex flex-col sm:flex-row justify-center w-full p-7 gap-7 items-start">
+                    <img className="w-full sm:max-w-sm" src={image} alt={'Book cover of ' + title + ' by ' + author} />
+                    <div className="w-full sm:max-w-lg items-center sm:items-start flex flex-col gap-2">
                         <h2 className="text-3xl font-semibold">{title}</h2>
                         <p>{author}</p>
                         <p>{pageCount} pages</p>
@@ -57,11 +57,11 @@ const BookPage = ({apiBaseUrl}) => {
                         { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
                         
                        
-                        <p className="italic">{blurb}</p>
+                        <p className="italic text-center sm:text-left">{blurb}</p>
 
                         { reviews && 
-                            <div id="reviews" className="max-w-xl mx-auto flex flex-col gap-3">
-                                <h3 className="text-2xl font-semibold">Reviews</h3>
+                            <div id="reviews" className="w-full sm:max-w-xl mx-auto flex flex-col gap-3">
+                                <h3 className="text-2xl font-semibold text-center sm:text-left">Reviews</h3>
                                 {reviews.map((review, index) => 
                                 <Review author={review.name} score={review.rating} reviewText={review.review} key={review.name + index} />)}
                             </div>

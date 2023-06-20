@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom"
 
 const Navbar = () => {
     return (
-        <nav className="flex flex-col md:flex-row flex-no-wrap justify-between items-center w-full bg-green-400 p-3">
+        <nav className="flex flex-col sm:flex-row flex-no-wrap justify-between items-center w-full bg-green-400 p-3">
             <Link to="/">
                 <h1 className="text-2xl font-semibold">
                     Book Swap
