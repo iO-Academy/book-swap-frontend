@@ -14,6 +14,7 @@ const BookPage = ({apiBaseUrl}) => {
     const [pageCount, setPageCount] = useState(null)
     const [genre, setGenre] = useState(null)
     const [reviews, setReviews] = useState([])
+    const [averageRating, setAverageRating] = useState(0)
 
     const {id} = useParams()
 
@@ -33,6 +34,10 @@ const BookPage = ({apiBaseUrl}) => {
         })
     }, [])
 
+    useEffect(() => {
+        setAverageRating(calculateAverageRating(reviews))
+    }, [reviews])
+
     const calculateAverageRating = (reviews) => {
         const ratings = reviews.map(review => review.rating)
         const average = ratings.reduce((sumSoFar, currentRating) => sumSoFar + currentRating, 0) / ratings.length
@@ -51,7 +56,7 @@ const BookPage = ({apiBaseUrl}) => {
                         <p>{genre}</p>
                         <p>
                             <a className="underline" href="#reviews">{reviews.length} reviews</a>
-                            {reviews && (' - ' + calculateAverageRating(reviews) + '/5 stars')}
+                            {reviews && (' - ' + averageRating + '/5 stars')}
                         </p>
                         
                         { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
