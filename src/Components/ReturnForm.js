@@ -22,7 +22,7 @@ const ReturnForm = ({id, apiBaseUrl, claimedBy, setClaimedBy}) => {
             } else {
                 response.json().then(responseBody => {
                     const emailErrorsString = responseBody.errors?.email?.join("\n")
-                    alert("Returning the book failed: \n" + (emailErrorsString ? emailErrorsString : responseBody.message))
+                    alert("Returning the book failed: \n" + (emailErrorsString ?? responseBody.message))
                 })
             }
         })
