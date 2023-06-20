@@ -53,7 +53,7 @@ const ReviewForm = ({id, apiBaseUrl, setReviews}) => {
             </div>
             
             <textarea className="p-1" rows="4" name="review" placeholder="Review" value={review} onChange={ (event) => setReview(event.target.value) } />
-            <input className="bg-green-500 p-1" type="submit" value="Claim"/>
+            <input className="bg-green-500 p-1" type="submit" value="Review"/>
         </form>
     )
 }
