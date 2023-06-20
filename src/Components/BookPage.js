@@ -12,7 +12,7 @@ const BookPage = ({apiBaseUrl}) => {
     const [image, setImage] = useState(null)
     const [pageCount, setPageCount] = useState(null)
     const [genre, setGenre] = useState(null)
-    const [reviews, setReviews] = useState(null)
+    const [reviews, setReviews] = useState([])
 
     const {id} = useParams()
 
@@ -31,6 +31,12 @@ const BookPage = ({apiBaseUrl}) => {
             setReviews(book.reviews)
         })
     }, [])
+
+    const calculateAverageRating = (reviews) => {
+        const ratings = reviews.map(review => review.rating)
+        const average = ratings.reduce((sumSoFar, currentRating) => sumSoFar + currentRating, 0) / ratings.length
+        return average.toFixed(1)
+    }
     
     return (
         <>
@@ -42,13 +48,19 @@ const BookPage = ({apiBaseUrl}) => {
                         <p>{author}</p>
                         <p>{pageCount} pages</p>
                         <p>{genre}</p>
+                        <p>
+                            <a className="underline" href="#reviews">{reviews.length} reviews</a>
+                            {reviews && (' - ' + calculateAverageRating(reviews) + '/5 stars')}
+                        </p>
+                        
                         { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
                         { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
                         
+                       
                         <p className="italic">{blurb}</p>
 
-                        {reviews && 
-                            <div className="max-w-xl mx-auto flex flex-col gap-3">
+                        { reviews && 
+                            <div id="reviews" className="max-w-xl mx-auto flex flex-col gap-3">
                                 <h3 className="text-2xl font-semibold">Reviews</h3>
                                 {reviews.map((review, index) => 
                                 <Review author={review.name} score={review.rating} reviewText={review.review} key={review.name + index} />)}
