@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import ClaimForm from "./ClaimForm"
+import ReturnForm from "./ReturnForm"
 
 const BookPage = ({apiBaseUrl}) => {
     const [title, setTitle] = useState(null)
@@ -40,6 +41,8 @@ const BookPage = ({apiBaseUrl}) => {
                 <p>{pageCount} pages</p>
                 <p>{genre}</p>
                 { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
+                { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
+                
                 <p className="italic">{blurb}</p>
             </div>
         </div>
