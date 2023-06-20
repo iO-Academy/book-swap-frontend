@@ -15,7 +15,8 @@ const BooksPage = ({apiBaseUrl, claimed}) => {
         <div className="flex flex-row flex-wrap justify-center">
             {
                 books ? books.map(book => <BookItem 
-                    id={book.id} 
+                    id={book.id}
+                    key={book.id} 
                     title={book.title} 
                     author={book.author}
                     genre={book.genre.name} 
