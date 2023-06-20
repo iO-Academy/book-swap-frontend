@@ -1,8 +1,8 @@
 import { useState } from "react"
 
 const ClaimForm = ({id, apiBaseUrl, setClaimedBy}) => {
-    const [name, setName] = useState(null)
-    const [email, setEmail] = useState(null)
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
 
     const handleSubmit = (event) => {
         event.preventDefault();

@@ -20,7 +20,6 @@ const BookPage = ({apiBaseUrl}) => {
         .then(response => response.json())
         .then(responseBody => {
             const book = responseBody.data
-            console.log(book)
             setTitle(book.title)
             setAuthor(book.author)
             setBlurb(book.blurb)
