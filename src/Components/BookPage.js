@@ -32,6 +32,7 @@ const BookPage = ({apiBaseUrl}) => {
     }, [])
     
     return (
+        !title ? <p className="text-center">Loading...</p> : 
         <div className="flex flex-row flex-wrap justify-center w-full p-7 gap-7">
             <img className="max-w-sm w-full" src={image} alt={'Book cover of ' + title + ' by ' + author} />
             <div className="max-w-lg flex flex-col gap-2">
