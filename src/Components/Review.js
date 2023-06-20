@@ -1,9 +1,9 @@
-const Review = ({author, score, reviewText}) => {
+const Review = ({author, rating, review}) => {
     return (
         <div>
             <p className="font-semibold">{author}</p>
-            <p>Score: {score}/5 stars</p>
-            <p>{reviewText}</p>
+            <p>Score: {rating}/5 stars</p>
+            <p>{review}</p>
         </div>
     )
 }

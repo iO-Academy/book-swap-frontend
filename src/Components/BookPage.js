@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import ClaimForm from "./ClaimForm"
 import ReturnForm from "./ReturnForm"
 import Review from "./Review"
+import ReviewForm from "./ReviewForm"
 
 const BookPage = ({apiBaseUrl}) => {
     const [title, setTitle] = useState(null)
@@ -59,13 +60,17 @@ const BookPage = ({apiBaseUrl}) => {
                        
                         <p className="italic text-center sm:text-left">{blurb}</p>
 
-                        { reviews && 
-                            <div id="reviews" className="w-full sm:max-w-xl mx-auto flex flex-col gap-3">
-                                <h3 className="text-2xl font-semibold text-center sm:text-left">Reviews</h3>
-                                {reviews.map((review, index) => 
-                                <Review author={review.name} score={review.rating} reviewText={review.review} key={review.name + index} />)}
-                            </div>
-                        }
+                         
+                        <div id="reviews" className="w-full sm:max-w-xl mx-auto flex flex-col gap-3">
+                            <h3 className="text-2xl font-semibold text-center sm:text-left">Reviews</h3>
+                            <ReviewForm id={id} apiBaseUrl={apiBaseUrl} setReviews={setReviews} />
+                            {reviews ? 
+                                reviews.map((review, index) => 
+                                    <Review name={review.name} rating={review.rating} review={review.review} key={review.name + index} />)
+                            : 'There are no reviews yet.'
+                            }
+                        </div>
+                        
                     </div>
                 </div>
             }
