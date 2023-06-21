@@ -1,18 +1,23 @@
 import BookItem from "./BookItem"
+import GenreFilter from "./GenreFilter"
 import {useState, useEffect} from 'react'
 
 const BooksPage = ({apiBaseUrl, claimed}) => {
     const [books, setBooks] = useState([])
+    const [genreId, setGenreId] = useState(0)
 
     useEffect(() => {
-        fetch(apiBaseUrl + '/books' + (claimed !== undefined ? '?claimed=' + claimed : '')).then(response => response.json())
+        const claimedQueryString = claimed !== undefined ? 'claimed=' + claimed + '&' : ''
+        const genreQueryString = genreId !== '0' ? 'genre=' + genreId : ''
+        fetch(apiBaseUrl + '/books?' + claimedQueryString + genreQueryString).then(response => response.json())
             .then(responseBody => {
                 setBooks(responseBody.data)
             })
-    }, [claimed])
+    }, [claimed, genreId])
 
     return (
         <div className="flex flex-row flex-wrap justify-center">
+            <GenreFilter apiBaseUrl={apiBaseUrl} genreId={genreId} setGenreId={setGenreId} />
             {
                 books ? books.map(book => <BookItem 
                     id={book.id}
