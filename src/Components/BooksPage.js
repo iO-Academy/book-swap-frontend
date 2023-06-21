@@ -16,18 +16,20 @@ const BooksPage = ({apiBaseUrl, claimed}) => {
     }, [claimed, genreId])
 
     return (
-        <div className="flex flex-row flex-wrap justify-center">
+        <div>
             <GenreFilter apiBaseUrl={apiBaseUrl} genreId={genreId} setGenreId={setGenreId} />
-            {
-                books ? books.map(book => <BookItem 
-                    id={book.id}
-                    key={book.id} 
-                    title={book.title} 
-                    author={book.author}
-                    genre={book.genre.name} 
-                    image={book.image} />
-                ) : 'Loading...'
-            }
+            <div className="flex flex-row flex-wrap justify-center">
+                {
+                    books ? books.map(book => <BookItem 
+                        id={book.id}
+                        key={book.id} 
+                        title={book.title} 
+                        author={book.author}
+                        genre={book.genre.name} 
+                        image={book.image} />
+                    ) : 'Loading...'
+                }
+            </div>
         </div>
     )
 }

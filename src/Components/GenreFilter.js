@@ -11,7 +11,7 @@ const GenreFilter = ({apiBaseUrl, genreId, setGenreId}) => {
     }, [])
 
     return (
-        <div className="flex flex-col sm:flex-row">
+        <div className="flex flex-col sm:flex-row gap-3 p-5 mx-auto items-center">
             <p>Filter by genre:</p>
            <select className="w-fit px-2 py-1" name="rating" value={genreId} onChange={(event) => setGenreId(event.target.value)}>
                 {genres?.map(genre => <option value={genre.id}>{genre.name}</option> )}
