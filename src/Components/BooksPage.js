@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 
 const BooksPage = ({apiBaseUrl, claimed}) => {
     const [books, setBooks] = useState([])
-    const [genreId, setGenreId] = useState(0)
+    const [genreId, setGenreId] = useState('0')
 
     useEffect(() => {
         const claimedQueryString = claimed !== undefined ? 'claimed=' + claimed + '&' : ''
