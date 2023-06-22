@@ -50,7 +50,7 @@ const BookPage = ({apiBaseUrl}) => {
                 <div className="flex flex-col sm:flex-row justify-center w-full p-7 gap-7 items-center sm:items-start">
                     <img className="w-full max-w-xs sm:max-w-sm" src={image} alt={'Book cover of ' + title + ' by ' + author} />
                     <div className="w-full sm:max-w-lg items-center sm:items-start flex flex-col gap-2">
-                        <h2 className="text-3xl font-semibold">{title}</h2>
+                        <h2 className="text-3xl font-semibold text-center sm:text-left">{title}</h2>
                         <p>{author}</p>
                         <p>{pageCount} pages</p>
                         <p>{genre}</p>
