@@ -32,7 +32,10 @@ const ReturnForm = ({id, apiBaseUrl, claimedBy, setClaimedBy}) => {
     return (
         <form className="flex flex-col max-w-xs gap-3 p-3 bg-green-300" onSubmit={handleSubmit}>
             <p>Want to return this book?</p>
-            <input className="p-1" type="email" name="email" placeholder={claimedBy + '\'s email'} value={email} onChange={ (event) => setEmail(event.target.value) } />
+            <div className="flex flex-col gap-1">
+                <label htmlFor="email" className="text-xs">Email</label>
+                <input className="p-1" type="email" id="email" name="email" placeholder={claimedBy + '\'s email'} value={email} onChange={ (event) => setEmail(event.target.value) } />
+            </div>
             <input className="bg-green-500 p-1" type="submit" value="Return"/>
         </form>
     )
