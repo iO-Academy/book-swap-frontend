@@ -38,7 +38,7 @@ const AddBookPage = ({apiBaseUrl}) => {
             },
             body: JSON.stringify(requestBody)
         }).then(response => {
-            if(response.status === 200) {
+            if(response.status === 201) {
                 navigate("/")
             } else {
                 response.json().then(responseBody => {
@@ -85,7 +85,7 @@ const AddBookPage = ({apiBaseUrl}) => {
             </div>
             <div className="flex flex-col gap-1">
                 <label htmlFor="blurb">Blurb</label>
-                <textarea className="p-1" type="text" id="blurb" rows="5" placeholder="Blurb" value={blurb} onChange={ (event) => setBlurb(event.target.value) }/>
+                <textarea className="p-1" type="text" id="blurb" rows="5" maxLength="500" placeholder="Blurb" value={blurb} onChange={ (event) => setBlurb(event.target.value) }/>
             </div>
             <input className="bg-green-400 p-1" type="submit" value="Add book"/>
 
