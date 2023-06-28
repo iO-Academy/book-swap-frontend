@@ -10,11 +10,13 @@ const BookPage = ({apiBaseUrl}) => {
     const [author, setAuthor] = useState(null)
     const [blurb, setBlurb] = useState(null)
     const [claimedBy, setClaimedBy] = useState(null)
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState('')
     const [pageCount, setPageCount] = useState(null)
     const [genre, setGenre] = useState(null)
     const [reviews, setReviews] = useState([])
     const [averageRating, setAverageRating] = useState(0)
+
+    const defaultImage = 'https://via.placeholder.com/600x840.png/000000?text=Book%20Cover%20Missing'
 
     const {id} = useParams()
 
@@ -48,7 +50,7 @@ const BookPage = ({apiBaseUrl}) => {
         <>
             {!title ? <p className="text-center">Loading...</p> : 
                 <div className="flex flex-col sm:flex-row justify-center w-full p-7 gap-7 items-center sm:items-start">
-                    <img className="w-full max-w-xs sm:max-w-sm" src={image} alt={'Book cover of ' + title + ' by ' + author} />
+                    <img className="w-full max-w-xs sm:max-w-sm" src={image ?? defaultImage} alt={'Book cover of ' + title + ' by ' + author} />
                     <div className="w-full sm:max-w-lg items-center sm:items-start flex flex-col gap-2">
                         <h2 className="text-3xl font-semibold text-center sm:text-left">{title}</h2>
                         <p>{author}</p>
