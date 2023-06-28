@@ -6,7 +6,8 @@ const AddBookPage = ({apiBaseUrl}) => {
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
-    const [genreId, setGenreId] = useState(null)
+    const [genreId, setGenreId] = useState(0)
+    const [pageCount, setPageCount] = useState(0)
     const [year, setYear] = useState(2000)
     const [image, setImage] = useState('')
     const [blurb, setBlurb] = useState('')
@@ -25,6 +26,7 @@ const AddBookPage = ({apiBaseUrl}) => {
             title: title,
             author: author,
             genre_id: genreId,
+            page_count: pageCount,
             year: year,
             image: image,
             blurb: blurb
@@ -71,9 +73,13 @@ const AddBookPage = ({apiBaseUrl}) => {
             <div className="flex flex-col gap-1">
                 <label htmlFor="genreId">Genre (required)</label>
                 <select className="w-fit px-2 py-1" name="genreId" value={genreId} onChange={(event) => setGenreId(event.target.value)}>
-                    <option value="null" disabled>Select</option>  
+                    <option value="0" disabled>Select</option>  
                     {genres?.map(genre => <option value={genre.id} key={genre.id}>{genre.name}</option> )}
                 </select> 
+            </div>
+            <div className="flex flex-col gap-1">
+                <label htmlFor="pageCount">Page count</label>
+                <input className="p-1" type="number" id="pageCount" name="pageCount" value={pageCount} onChange={ (event) => setPageCount(event.target.value) }/>
             </div>
             <div className="flex flex-col gap-1">
                 <label htmlFor="year">Year</label>
