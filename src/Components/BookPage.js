@@ -54,18 +54,18 @@ const BookPage = ({apiBaseUrl}) => {
                     <div className="w-full sm:max-w-lg items-center sm:items-start flex flex-col gap-2">
                         <h2 className="text-3xl font-semibold text-center sm:text-left">{title}</h2>
                         <p>{author}</p>
-                        <p>{pageCount} pages</p>
+                        {pageCount && <p>{pageCount} pages</p>}
                         <p>{genre}</p>
                         <p>
                             <a className="underline" href="#reviews">{reviews.length} reviews</a>
-                            {reviews && (' - ' + averageRating + '/5 stars')}
+                            {reviews != 0 && (' - ' + averageRating + '/5 stars')}
                         </p>
                         
                         { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
                         { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
                         
                        
-                        <p className="italic text-center sm:text-left">{blurb}</p>
+                        {blurb && <p className="italic text-center sm:text-left">{blurb}</p>}
 
                          
                         <div id="reviews" className="w-full sm:max-w-xl mx-auto flex flex-col gap-3">
