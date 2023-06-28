@@ -40,7 +40,7 @@ const ReviewForm = ({id, apiBaseUrl, setReviews}) => {
         <form className="flex flex-col w-full sm:max-w-xs gap-3 p-3 bg-green-300" onSubmit={handleSubmit}>
             <p>Want to review this book?</p>
             <div className="flex flex-col gap-1">
-                <label htmlFor="name" className="text-xs">Email</label>
+                <label htmlFor="name" className="text-xs">Name</label>
                 <input className="p-1" type="text" id="name" name="name" placeholder="Name" value={name} onChange={ (event) => setName(event.target.value) }/>
             </div>
             <div className="flex gap-3 items-center">
