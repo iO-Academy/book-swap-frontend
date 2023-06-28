@@ -61,7 +61,7 @@ const AddBookPage = ({apiBaseUrl}) => {
     }
 
     return (
-        <form className="max-w-xl mx-auto my-3 flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="max-w-xl mx-auto my-3 flex flex-col gap-4 px-3" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-1">
                 <label htmlFor="title">Title (required)</label>
                 <input className="p-1" type="text" id="title" name="title" placeholder="Title" value={title} onChange={ (event) => setTitle(event.target.value) }/>
