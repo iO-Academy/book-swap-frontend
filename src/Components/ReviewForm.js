@@ -57,7 +57,15 @@ const ReviewForm = ({id, apiBaseUrl, setReviews}) => {
             
             <div className="flex flex-col gap-1">
                 <label htmlFor="review" className="text-xs">Review</label>
-                <textarea className="p-1" rows="4" id="review" name="review" placeholder="Review" value={review} onChange={ (event) => setReview(event.target.value) } /> 
+                <textarea 
+                    className="p-1" 
+                    rows="4" 
+                    id="review" 
+                    name="review" 
+                    placeholder="Review"
+                    maxLength={255} 
+                    value={review} 
+                    onChange={ (event) => setReview(event.target.value) } /> 
             </div>
             <input className="bg-green-500 p-1" type="submit" value="Review"/>
         </form>
