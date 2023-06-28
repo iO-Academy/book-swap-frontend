@@ -11,6 +11,7 @@ const Navbar = () => {
             <div className="flex flex-row flex-wrap gap-3">
                 <NavLink className={({isActive, isPending}) => isActive ? 'font-semibold' : 'hover:text-slate-500 transition-colors'} to="/">Available books</NavLink>
                 <NavLink className={({isActive, isPending}) => isActive ? 'font-semibold' : 'hover:text-slate-500 transition-colors'} to="/claimed">Claimed books</NavLink>
+                <NavLink className={({isActive, isPending}) => isActive ? 'font-semibold' : 'hover:text-slate-500 transition-colors'} to="/books/add">Add book</NavLink>
             </div>
         </nav>
     )
