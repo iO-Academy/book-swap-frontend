@@ -12,6 +12,7 @@ const BookPage = ({apiBaseUrl}) => {
     const [claimedBy, setClaimedBy] = useState(null)
     const [image, setImage] = useState('')
     const [pageCount, setPageCount] = useState(null)
+    const [year, setYear] = useState(null)
     const [genre, setGenre] = useState(null)
     const [reviews, setReviews] = useState([])
     const [averageRating, setAverageRating] = useState(0)
@@ -31,6 +32,7 @@ const BookPage = ({apiBaseUrl}) => {
             setClaimedBy(book.claimed_by_name)
             setImage(book.image)
             setPageCount(book.page_count)
+            setYear(book.year)
             setGenre(book.genre.name)
             setReviews(book.reviews)
         })
@@ -54,6 +56,7 @@ const BookPage = ({apiBaseUrl}) => {
                     <div className="w-full sm:max-w-lg items-center sm:items-start flex flex-col gap-2">
                         <h2 className="text-3xl font-semibold text-center sm:text-left">{title}</h2>
                         <p>{author}</p>
+                        {year && <p>{year}</p>}
                         {pageCount && <p>{pageCount} pages</p>}
                         <p>{genre}</p>
                         <p>
