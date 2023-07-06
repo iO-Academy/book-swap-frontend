@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const GenreFilter = ({apiBaseUrl, genreId, setGenreId}) => {
+const SearchFilter = ({apiBaseUrl, genreId, setGenreId, search, setSearch}) => {
     const [genres, setGenres] = useState([])
 
     useEffect(() => {
@@ -15,10 +15,12 @@ const GenreFilter = ({apiBaseUrl, genreId, setGenreId}) => {
             <label htmlFor="genreId">Filter by genre:</label>
             <select className="w-fit px-2 py-1" name="genreId" value={genreId} onChange={(event) => setGenreId(event.target.value)}>
                 {genres?.map(genre => <option value={genre.id} key={genre.id}>{genre.name}</option> )}
-            </select> 
+            </select>
+            <label htmlFor="search">Search:</label>
+            <input type="search" value={search} onChange={event => setSearch(event.target.value)}/>
         </div>
         
     )
 }
 
-export default GenreFilter
+export default SearchFilter
