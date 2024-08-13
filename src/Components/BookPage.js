@@ -16,6 +16,8 @@ const BookPage = ({apiBaseUrl}) => {
     const [genre, setGenre] = useState(null)
     const [reviews, setReviews] = useState([])
     const [averageRating, setAverageRating] = useState(0)
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const defaultImage = 'https://via.placeholder.com/600x840.png/000000?text=Book%20Cover%20Missing'
 
@@ -25,16 +27,21 @@ const BookPage = ({apiBaseUrl}) => {
         fetch(apiBaseUrl + '/books/' + id)
         .then(response => response.json())
         .then(responseBody => {
-            const book = responseBody.data
-            setTitle(book.title)
-            setAuthor(book.author)
-            setBlurb(book.blurb)
-            setClaimedBy(book.claimed_by_name)
-            setImage(book.image)
-            setPageCount(book.page_count)
-            setYear(book.year)
-            setGenre(book.genre.name)
-            setReviews(book.reviews)
+            if (!responseBody.success) {
+                setError(true)
+                setErrorMessage(responseBody.message)
+            } else {
+                const book = responseBody.data
+                setTitle(book.title)
+                setAuthor(book.author)
+                setBlurb(book.blurb)
+                setClaimedBy(book.claimed_by_name)
+                setImage(book.image)
+                setPageCount(book.page_count)
+                setYear(book.year)
+                setGenre(book.genre.name)
+                setReviews(book.reviews)
+            }
         })
     }, [])
 
@@ -50,40 +57,44 @@ const BookPage = ({apiBaseUrl}) => {
     
     return (
         <>
-            {!title ? <p className="text-center">Loading...</p> : 
-                <div className="flex flex-col sm:flex-row justify-center w-full p-7 gap-7 items-center sm:items-start">
-                    <img className="w-full max-w-xs sm:max-w-sm" src={image ?? defaultImage} alt={'Book cover of ' + title + ' by ' + author} />
-                    <div className="w-full sm:max-w-lg items-center sm:items-start flex flex-col gap-2">
-                        <h2 className="text-3xl font-semibold text-center sm:text-left">{title}</h2>
-                        <p>{author}</p>
-                        {year && <p>{year}</p>}
-                        {pageCount && <p>{pageCount} pages</p>}
-                        <p>{genre}</p>
-                        <p>
-                            <a className="underline" href="#reviews">{reviews.length} reviews</a>
-                            {reviews != 0 && (' - ' + averageRating + '/5 stars')}
-                        </p>
-                        
-                        { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
-                        { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
-                        
-                       
-                        {blurb && <p className="italic text-center sm:text-left">{blurb}</p>}
+            {error ? <p className="text-center">{errorMessage}</p> : (
+                <>
+                    {!title ? <p className="text-center">Loading...</p> : 
+                        <div className="flex flex-col sm:flex-row justify-center w-full p-7 gap-7 items-center sm:items-start">
+                            <img className="w-full max-w-xs sm:max-w-sm" src={image ?? defaultImage} alt={'Book cover of ' + title + ' by ' + author} />
+                            <div className="w-full sm:max-w-lg items-center sm:items-start flex flex-col gap-2">
+                                <h2 className="text-3xl font-semibold text-center sm:text-left">{title}</h2>
+                                <p>{author}</p>
+                                {year && <p>{year}</p>}
+                                {pageCount && <p>{pageCount} pages</p>}
+                                <p>{genre}</p>
+                                <p>
+                                    <a className="underline" href="#reviews">{reviews.length} reviews</a>
+                                    {reviews != 0 && (' - ' + averageRating + '/5 stars')}
+                                </p>
+                                
+                                { claimedBy ? 'Claimed by ' + claimedBy : <ClaimForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} />}
+                                { claimedBy && <ReturnForm id={id} apiBaseUrl={apiBaseUrl} setClaimedBy={setClaimedBy} claimedBy={claimedBy} /> }
+                                
+                            
+                                {blurb && <p className="italic text-center sm:text-left">{blurb}</p>}
 
-                         
-                        <div id="reviews" className="w-full sm:max-w-xl mx-auto flex flex-col gap-3">
-                            <h3 className="text-2xl font-semibold text-center sm:text-left">Reviews</h3>
-                            <ReviewForm id={id} apiBaseUrl={apiBaseUrl} setReviews={setReviews} />
-                            {reviews ? 
-                                reviews.map((review, index) => 
-                                    <Review name={review.name} rating={review.rating} review={review.review} key={review.name + index} />)
-                            : 'There are no reviews yet.'
-                            }
+                                
+                                <div id="reviews" className="w-full sm:max-w-xl mx-auto flex flex-col gap-3">
+                                    <h3 className="text-2xl font-semibold text-center sm:text-left">Reviews</h3>
+                                    <ReviewForm id={id} apiBaseUrl={apiBaseUrl} setReviews={setReviews} />
+                                    {reviews ? 
+                                        reviews.map((review, index) => 
+                                            <Review name={review.name} rating={review.rating} review={review.review} key={review.name + index} />)
+                                    : 'There are no reviews yet.'
+                                    }
+                                </div>
+                            </div>
                         </div>
-                        
-                    </div>
-                </div>
-            }
+                    }
+                </>
+            )}
+            
             
         </>
     )
