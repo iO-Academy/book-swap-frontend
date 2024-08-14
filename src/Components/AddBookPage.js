@@ -28,9 +28,16 @@ const AddBookPage = ({apiBaseUrl}) => {
             genre_id: genreId,
             page_count: pageCount,
             year: year,
-            image: image,
-            blurb: blurb
         }
+
+        if (blurb !== '') {
+            requestBody.blurb = blurb
+        }
+
+        if (image !== '') {
+            requestBody.image = image
+        }
+
         fetch(apiBaseUrl + '/books', {
             mode: 'cors',
             method: 'POST',
