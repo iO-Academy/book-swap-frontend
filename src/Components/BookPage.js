@@ -27,7 +27,7 @@ const BookPage = ({apiBaseUrl}) => {
         fetch(apiBaseUrl + '/books/' + id)
         .then(response => response.json())
         .then(responseBody => {
-            if (!responseBody.success) {
+            if ("success" in responseBody && !responseBody.success) {
                 setError(true)
                 setErrorMessage(responseBody.message)
             } else {
